@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Member Registration Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        input, select {
+            margin: 10px 0;
+            padding: 10px;
+            font-size: 1em;
+        }
+        .error {
+            color: red;
+            font-size: 0.9em;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+    <script>
+        function validateForm() {
+            let isValid = true;
+
+            const name = document.getElementById('name').value;
+            const shortName = document.getElementById('shortName').value;
+            const age = document.getElementById('age').value;
+            const gender = document.getElementById('gender').value;
+            const address = document.getElementById('address').value;
+            const city = document.getElementById('city').value;
+            const postalCode = document.getElementById('postalCode').value;
+            const province = document.getElementById('province').value;
+            const email = document.getElementById('email').value;
+
+            const nameError = document.getElementById('nameError');
+            const shortNameError = document.getElementById('shortNameError');
+            const ageError = document.getElementById('ageError');
+            const genderError = document.getElementById('genderError');
+            const addressError = document.getElementById('addressError');
+            const cityError = document.getElementById('cityError');
+            const postalCodeError = document.getElementById('postalCodeError');
+            const provinceError = document.getElementById('provinceError');
+            const emailError = document.getElementById('emailError');
+
+            nameError.textContent = '';
+            shortNameError.textContent = '';
+            ageError.textContent = '';
+            genderError.textContent = '';
+            addressError.textContent = '';
+            cityError.textContent = '';
+            postalCodeError.textContent = '';
+            provinceError.textContent = '';
+            emailError.textContent = '';
+
+            if (name === '') {
+                nameError.textContent = 'Full Name is required';
+                isValid = false;
+            }
+
+            if (shortName === '') {
+                shortNameError.textContent = 'Nickname is required';
+                isValid = false;
+            }
+
+            if (age === '' || isNaN(age) || age <= 0) {
+                ageError.textContent = 'Enter a valid age';
+                isValid = false;
+            }
+
+            if (gender === '') {
+                genderError.textContent = 'Select a gender';
+                isValid = false;
+            }
+
+            if (address === '') {
+                addressError.textContent = 'Address is required';
+                isValid = false;
+            }
+
+            if (city === '') {
+                cityError.textContent = 'City is required';
+                isValid = false;
+            }
+
+            if (postalCode === '' || !/^\d{5}$/.test(postalCode)) {
+                postalCodeError.textContent = 'Enter a valid 5-digit postal code';
+                isValid = false;
+            }
+
+            if (province === '') {
+                provinceError.textContent = 'Province is required';
+                isValid = false;
+            }
+
+            const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+            if (email === '') {
+                emailError.textContent = 'Email is required';
+                isValid = false;
+            } else if (!email.match(emailPattern)) {
+                emailError.textContent = 'Invalid email format';
+                isValid = false;
+            }
+
+            if (isValid) {
+                alert('Registration Successful!');
+            }
+
+            return isValid;
+        }
+    </script>
+</head>
+<body>
+
+    <h2>Member Registration Form</h2>
+
+    <form id="memberForm" onsubmit="return validateForm()">
+        <label for="name">Full Name:</label>
+        <input type="text" id="name" name="name">
+        <span class="error" id="nameError"></span><br>
+
+        <label for="shortName">Nickname:</label>
+        <input type="text" id="shortName" name="shortName">
+        <span class="error" id="shortNameError"></span><br>
+
+        <label for="age">Age:</label>
+        <input type="text" id="age" name="age">
+        <span class="error" id="ageError"></span><br>
+
+        <label for="gender">Gender:</label>
+        <select id="gender" name="gender">
+            <option value="">Select Gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+        </select>
+        <span class="error" id="genderError"></span><br>
+
+        <label for="address">Address:</label>
+        <input type="text" id="address" name="address">
+        <span class="error" id="addressError"></span><br>
+
+        <label for="city">City:</label>
+        <input type="text" id="city" name="city">
+        <span class="error" id="cityError"></span><br>
+
+        <label for="postalCode">Postal Code:</label>
+        <input type="text" id="postalCode" name="postalCode">
+        <span class="error" id="postalCodeError"></span><br>
+
+        <label for="province">Province:</label>
+        <input type="text" id="province" name="province">
+        <span class="error" id="provinceError"></span><br>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email">
+        <span class="error" id="emailError"></span><br>
+
+        <button type="submit">Register</button>
+    </form>
+
+</body>
+</html>
